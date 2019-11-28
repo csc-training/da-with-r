@@ -61,7 +61,7 @@ ggplot(data = surveys_complete)
 ggplot(data = surveys_complete, 
 mapping = aes(x = weight, y = hindfoot_length, color = species_id))
 
-# we're telling R that we want to create a plot with weight on the x acis, hindfoot length on the y axis, with colors according to the species
+# we're telling R that we want to create a plot with weight on the x axis, hindfoot length on the y axis, with colors according to the species
 ```
 
 - add ‘geoms’ – graphical representations of the data in the plot (points, lines, bars). `ggplot2` offers many different geoms; we will use some common ones today, including:
