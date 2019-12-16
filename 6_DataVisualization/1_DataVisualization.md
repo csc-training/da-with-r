@@ -29,12 +29,9 @@ If not still in the workspace, load the data we saved in the previous lesson.
 ```r
 surveys_complete <- read_csv("data_output/surveys_complete.csv")
 
-# The data can also be downloaded:
-download.file(url = "https://tinyurl.com/surveyscomplete",
+# If you're looking at this episode on its own, you can download the data from:
+download.file(url = "https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv",
  destfile = "data_output/surveys_complete.csv")
-
-# the tinyurl links to:
-# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv
 ```
 
 #### 2. Plotting with `ggplot2`
@@ -271,6 +268,13 @@ Create a histogram that compares how the `hindfoot_length` are distributed for m
 
 **Tip:** When plotting two data sets together in the same histogram, adding `position = "dodge"` inside the `geom` can make the results easier to interpret (it asks R to produce an interleaved plot, i.e. values are shown side-by-side rather than stacked on top of one another).    
 
+```r
+ggplot(surveys_complete, aes(x = weight, color = sex)) +
+  geom_histogram(fill = "white", alpha = 0.5, binwidth = 4, position = "dodge") 
+```
+
+![](Images/histogram3.png?raw=true)
+
 #### 6. Box plots
 
 Histograms provide detailed information about the distribution of a given data set. However, comparing different sets of measurements in this way can become challenging, particularly when we are interested in comparing multiple groups with one another. While they do not offer the same level of detail for individual sets of data, box plots provide a useful way to accomplish this. For example, we could use box plots to summarize the distribution of weight within each species:
@@ -295,19 +299,44 @@ ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
 
 Notice how the boxplot layer is behind the jitter layer? What do you need to change in the code to put the boxplot in front of the points such that it’s not hidden?
 
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+ geom_jitter(alpha = 0.3, color = "tomato") +
+ geom_boxplot(alpha = 0)
+
+# geom_jitter before geom_boxplot
+```
+
 **Challenge**
 
 Boxplots are useful summaries, but hide the *shape* of the distribution. For example, if the distribution is bimodal, we would not see it in a boxplot. In addition to histograms, an alternative to the boxplot is the violin plot, where the shape (of the density of points) is drawn.
 
 - Replace the box plot with a violin plot; see `geom_violin()`. Let's also remove `geom_jitter` from this step.
 
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_violin(alpha = 0)
+```
+
 In many types of data, it is important to consider the *scale* of the observations. For example, it may be worth changing the scale of the axis to better distribute the observations in the space of the plot. Changing the scale of the axes is done similarly to adding / modifying other components (i.e., by incrementally adding commands). Try making these modifications:
 
 - Represent weight on the log10 scale; see `scale_y_log10()`.
 
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  geom_violin(alpha = 0) +
+  scale_y_log10()
+```
+
 So far, we’ve looked at the distribution of weight within species. Try making a new plot to explore the distribution of another variable within each species.
 
 - Create a boxplot for `hindfoot_length`. Overlay the boxplot layer on a jitter layer to show actual measurements.
+
+```r
+ggplot(data = surveys_complete, mapping = aes(x = species_id, y = hindfoot_length)) +
+geom_jitter(alpha = 0.3, color = "tomato") +
+geom_boxplot(alpha = 0) 
+```
 
 #### 7. Line plots (time series data)
 

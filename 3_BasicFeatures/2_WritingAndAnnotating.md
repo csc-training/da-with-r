@@ -223,6 +223,8 @@ In this workshop, we will be spending lots of time with data frames, arguably th
 
 **Q:** We’ve seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector?
 
+**A:** R implicitly converts them to all be the same type
+
 **Q:** What will happen in each of these examples? (hint: use `class()` to check the data type of your objects):
 
 ```r
@@ -234,6 +236,8 @@ tricky <- c(1, 2, 3, "4")
 
 Why do you think it happens?
 
+**A:** Vectors can be of only one data type. R tries to convert (coerce) the content of this vector to find a “common denominator” that doesn’t lose any information.
+
 **Q:** How many values in `combined_logical` are `"TRUE"` (as a character) in the following example:
 
 ```r
@@ -242,7 +246,11 @@ char_logical <- c("a", "b", "c", TRUE)
 combined_logical <- c(num_logical, char_logical)
 ```
 
+**A:** Only one. There is no memory of past data types, and the coercion happens the first time the vector is evaluated. Therefore, the `TRUE` in `num_logical` gets converted into a `1` before it gets converted into `"1"` in `combined_logical`.
+
 **Q:** You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class *coercion*. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?
+
+**A:** logical → numeric → character ← logical
 
 #### 7. Subsetting vectors
 
@@ -348,6 +356,8 @@ animals[animals %in% c("rat", "cat", "dog", "duck", "goat")]
 
 *Optional challenge:* Can you figure out why `"four" > "five"` returns `TRUE`?
 
+*A:* When using “>” or “<” on strings, R compares their alphabetical order. Here “four” comes after “five”, and therefore is “greater than” it.
+
 ### 8. Missing data
 
 As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as `NA`.
@@ -388,3 +398,21 @@ heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65,
 
 2. Use the function `median()` to calculate the median of the `heights` vector.
 3. Use R to figure out how many people in the set are taller than 67 inches.
+
+**Answers:**
+
+```r
+# 1.
+heights_no_na <- heights[!is.na(heights)] 
+# or
+heights_no_na <- na.omit(heights)
+# or
+heights_no_na <- heights[complete.cases(heights)]
+
+# 2.
+median(heights, na.rm = TRUE)
+
+# 3.
+heights_above_67 <- heights_no_na[heights_no_na > 67]
+length(heights_above_67)
+```

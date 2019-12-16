@@ -40,12 +40,11 @@ library(tidyverse) # Reloading tidyverse
 
 surveys_complete <- read_csv("data_output/surveys_complete.csv")
 
-# The data can also be downloaded:
-download.file(url = "https://tinyurl.com/surveyscomplete",
- destfile = "data_output/surveys_complete.csv")
+# If you're looking at this episode on its own, 
+# you can download the data from:
 
-# the tinyurl links to:
-# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv
+download.file(url = "https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv",
+ destfile = "data_output/surveys_complete.csv") 
 ```
 
 The functions for *t*-tests, Chi-squared tests and linear regression come as part of a default R installation, so we don't have to load separate packages for those. However, we can install and load the package `ggfortify`, which is useful for plotting purposes:
@@ -182,10 +181,6 @@ For a typical parametric analysis, we would move through the following steps:
 
 *Remember that in some cases a non-parametric test might be your best option to start with*. The steps taken for these are very similar: describe the data, check that the assumptions are met, then go ahead with significance testing.
 
-**Challenge**
-
-Discuss in pairs: can you think of examples of data sets where a non-parametric test would be your first choice?
-
 #### 5. Examples of statistical methods
 
 We are now ready to learn about some common statistical techniques and how to use them in R. We will start with two parametric methods (*t*-test and linear regression), after which we will move onto the Chi-squared (*χ*<sup>2</sup>) test as an example of a non-parametric method.
@@ -262,7 +257,19 @@ ggplot(sleepdata, aes(x = extra)) +
 
 ![](Images/sleep_normal.png)
 
+**Answer:** Although it seems possible that the data could be normally distributed, particularly in group 1, it is difficult to tell. This serves to highlight two points:
+
+- Evaluating test diagnostics can be challenging when dealing with limited data. In fact there are separate statistical tests for evaluating normality. We will not cover those, partially because they can be tricky to interpret (e.g. due to the outcome depending on the sample size). A golden rule is that, whatever you do, always plot the data (don't rely on statistics alone!).
+
+- In practice, some violations of normality are likely to be acceptable because parametric tests are fairly robust to these. This is particularly so when dealing with a _balanced design_, that is, a situation where each group has an equal number of observations.
 2. Do you think the box plot we created is useful for evaluating parametric test diagnostics? Is there anything you would display differently? 
+
+**Answer:** While parametric tests employ the mean as a measure of central tendency, box plots display the median by default. While we didn't cover this earlier, there is a way in `ggplot2` to change the behavior of `geom_boxplot` to display the mean instead. This can be done using `middle`:
+
+```r
+# ggplot(data = df, aes(x = x_variable, y = y_variable)) + 
+#        geom_boxplot(aes(middle = mean(y_variable)))
+```
 
 **Independent-samples _t_-test**
 

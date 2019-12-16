@@ -63,14 +63,13 @@ This looks OK for now, but we could also change it using `setwd(...)` (with the 
 We can now download and then import the data:
 
 ```r
-download.file(url="https://tinyurl.com/portaljoined",
+download.file(url="https://ndownloader.figshare.com/files/2292169",
               destfile = "data/portal_data_joined.csv")
 
 surveys <- read.csv("data/portal_data_joined.csv")
 
-# Alternative links to the portal data:
+# Alternative link to the portal data:
 # https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/portal_data_joined.csv
-# https://ndownloader.figshare.com/files/2292169
 ```
 
 This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: `surveys`.
@@ -130,6 +129,12 @@ Based on the output of `str(surveys)`, can you answer the following questions?
 - How many rows and how many columns are in this object?
 - How many species have been recorded during these surveys?
 
+```r
+## * class: data frame
+## * how many rows: 34786,  how many columns: 13
+## * how many species: 48
+```
+
 #### 5. Indexing and subsetting data frames
 
 Our survey data frame has rows and columns (it has 2 dimensions), if we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.
@@ -188,6 +193,29 @@ In RStudio, you can use the autocompletion feature to get the full and correct n
 3. Use `nrow()` to extract the row that is in the middle of the data frame. Store the content of this row in an object named `surveys_middle`.
 
 4. Combine `nrow()` with the `-` notation above to reproduce the behavior of `head(surveys)`, keeping just the first through 6th rows of the surveys dataset.
+
+**Answers:**
+
+```r
+# 1.
+surveys_200 <- surveys[200, ]
+
+# 2.
+nrow(surveys)
+surveys_last1 <- surveys[34786, ]
+tail(surveys)
+
+# (Saving `n_rows` to improve readability)
+n_rows <- nrow(surveys)
+surveys_last2 <- surveys[n_rows, ]
+
+## 3.
+surveys_middle <- surveys[n_rows / 2, ]
+
+## 4.
+head(surveys)
+surveys_head <- surveys[-(7:n_rows), ]
+```
 
 #### 6. Introducing factors
 
@@ -294,6 +322,15 @@ head(sex)
 - Rename “F” and “M” to “female” and “male” respectively.
 - Now that we have renamed the factor level to “undetermined”, can you recreate the barplot such that “undetermined” is last (after “male”)?
 
+**Answer:**
+
+```r
+levels(sex)[2:3] <- c("female", "male")
+
+sex <- factor(sex, levels = c("female", "male", "undetermined"))
+plot(sex)
+```
+
 #### 9. Using `stringsAsFactors=FALSE`
 
 By default, when building or importing a data frame, the columns that contain characters (i.e. text) are coerced (= converted) into factors. Depending on what you want to do with the data, you may want to keep these columns as `character`. To do so, `read.csv()` and `read.table()` have an argument called `stringsAsFactors` which can be set to `FALSE`.
@@ -323,6 +360,10 @@ animal_data <- data.frame(
           feel = c("furry", "squishy", "spiny"),
           weight = c(45, 8 1.1, 0.8)
           )
+
+# missing quotations around the names of the animals
+# missing entry in the feel column (one of the furry animals)
+# missing one comma in the weight column
 ```
 
 2. Can you predict the class for each of the columns in the following example? Check your guesses using `str(country_climate)`:
@@ -338,6 +379,10 @@ country_climate <- data.frame(
        northern_hemisphere = c(TRUE, TRUE, FALSE, "FALSE"),
        has_kangaroo = c(FALSE, FALSE, FALSE, 1)
        )
+
+# country, climate, temperature, and northern_hemisphere are factors; has_kangaroo is numeric
+# using stringsAsFactors = FALSE would have made character vectors instead of factors
+# removing quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the has_kangaroo column
 ```
 
 The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (for instance, a letter in a column that should only contain numbers).

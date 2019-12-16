@@ -79,9 +79,22 @@ c('d', 'e', 'f')
 c(1, 2, 'f')
 ```
 
+**Answer**: 
+
+The `c()` function creates a vector, in which all elements are the same type. In the first case, the elements are numeric, in the second, they are characters, and in the third they are characters: the numeric values are “coerced” to be characters.
 
 **Challenge 2:** Try to figure out how to use a completely new function based only on its documentation. Use `sample()` to produce
 
 - a Finnish lottery ticket: 7 randomly drawn numbers out of 40
 - a vector of 0s and 1s, representing 10 coin tosses
 
+**Answer**: 
+
+```r
+sample(1:40, 7)
+# sample(40, 7)
+
+sample(c(0, 1), 10, replace = TRUE) # sampling with replacement
+# sample(0:1, 10, replace = TRUE)
+# sample(2, 10, replace = TRUE)
+```

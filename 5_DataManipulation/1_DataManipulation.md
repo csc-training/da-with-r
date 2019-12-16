@@ -184,6 +184,11 @@ Note that the final data frame (`surveys_sml`) is the leftmost part of this expr
 
 Using pipes, subset the `surveys` data to include animals collected before 1995 and retain only the columns `year`, `sex`, and `weight`.
 
+```r
+surveys %>%
+    filter(year < 1995) %>%
+    select(year, sex, weight)
+```
 
 #### 5. The `mutate` function
 
@@ -229,6 +234,13 @@ Create a new data frame from the `surveys` data that meets the following criteri
 
 **Hint**: think about how the commands should be ordered to produce this data frame!
 
+```r
+surveys_hindfoot_half <- surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    mutate(hindfoot_half = hindfoot_length / 2) %>%
+    filter(hindfoot_half < 30) %>%
+    select(species_id, hindfoot_half)
+```
 
 #### 6. Split-apply-combine and `summarize`
 
@@ -348,12 +360,35 @@ From the table above, we may learn that, for instance, there are 75 observations
 
 1. How many animals were caught in each `plot_type` surveyed?
 
+```r
+surveys %>%
+    count(plot_type)
+```
 
 2. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot length for each species (using `species_id`). Also add the number of observations (hint: see `?n`).
 
+```r
+surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    group_by(species_id) %>%
+    summarize(
+        mean_hindfoot_length = mean(hindfoot_length),
+        min_hindfoot_length = min(hindfoot_length),
+        max_hindfoot_length = max(hindfoot_length),
+        n = n()
+    )
+```
 
 3. What was the heaviest animal measured in each year? Return the columns `year`, `genus`, `species_id`, and `weight`.
 
+```r
+surveys %>%
+    filter(!is.na(weight)) %>%
+    group_by(year) %>%
+    filter(weight == max(weight)) %>%
+    select(year, genus, species, weight) %>%
+    arrange(year)
+```
 
 #### 8. Reshaping with `gather` and `spread`
 
@@ -459,15 +494,37 @@ surveys_spread %>%
 
 1. Spread the `surveys` data frame with `year` as columns, `plot_id` as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function `n_distinct()` to get the number of unique genera within a particular chunk of data. It’s a powerful function! See `?n_distinct` for more.
 
+```r
+surveys_newspread <- surveys %>%
+  group_by(plot_id, year) %>%
+  summarize(n_genera = n_distinct(genus)) %>%
+  spread(year, n_genera)
+
+head(surveys_newspread)
+```
 
 2. Now take that data frame and `gather()` it again, so each row is a unique `plot_id` by `year` combination.
 
+```r
+surveys_newspread %>%
+  gather(year, n_genera, -plot_id)
+```
 
 3. The `surveys` data set has two measurement columns: `hindfoot_length` and `weight`. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use `gather()` to create a dataset where we have a key column called `measurement` and a `value` column that takes on the value of either `hindfoot_length` or `weight`. *Hint*: You’ll need to specify which columns are being gathered.
 
+```r
+surveys_long <- surveys %>%
+  gather(measurement, value, hindfoot_length, weight)
+```
 
 4. With this new data set, calculate the average of each `measurement` in each `year` for each different `plot_type`. Then `spread()` them into a data set with a column for `hindfoot_length` and `weight`. *Hint*: You only need to specify the key and value columns for `spread()`.
 
+```r
+surveys_long %>%
+  group_by(year, measurement, plot_type) %>%
+  summarize(mean_value = mean(value, na.rm=TRUE)) %>%
+  spread(measurement, mean_value)
+```
 
 #### 9. `write_csv` for data exporting
 
