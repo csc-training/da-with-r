@@ -51,11 +51,11 @@ This might be an example of a spreadsheet setup:
 
 4. Leave the raw data raw - don’t change it!
 
-5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the* data, and is required by most data repositories.
+5. Export the cleaned data to a text-based format like CSV (comma-separated values) format. This ensures that anyone can use the data, and is required by most data repositories.
 
 Extra guidelines to avoid problems at a later stage:
 
-- **Avoid using multible separate tables**, for example:
+- **Avoid using multiple separate tables**, for example:
 
 ![](Images/multibletables.jpg?raw=true)
 
@@ -89,13 +89,16 @@ In the example above, the computer will see (for example) row 4 and assume that 
 
 #### 3. Additional arguments for CSV importing
 
-Before we carry on working with the survey data, let's have a closer look at some of the arguments in `read.csv` (aside from `stringsAsFactors`). For this, we will load another data set into R, this time containing information on the speeds at which cars of different colors were clocked in 45 mph zones in different US states. The data are in a file called `CarSpeeds.csv`. 
+Before we carry on working with the survey data, let's have a closer look at some of the arguments in `read.csv` (aside from `stringsAsFactors`). For this, we will load another data set into R, this time containing information on the speeds at which cars of different colors were clocked in 45 mph zones in different US states. We can save the data into a file called `car_speeds.csv`. 
 
 Since we are working "in the cloud", we will again first use `download.file`  to retrieve the data from the web:
 
 ```r
-download.file(url="https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/car-speeds.csv",
+download.file(url = "https://tinyurl.com/carspeeds",
 destfile = "data/car_speeds.csv")
+
+# alternative link:
+# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/car-speeds.csv
 ```
 
 Then we can import the data into R and have a look at internal structure:
@@ -229,3 +232,13 @@ You now know some of the principles for importing data into R and exporting them
 One more thing, though: how to load and save an R script?
 
 In RStudio, we can click on `File` --> `Open File...` to load an existing script. We can also save the current one using `File` --> `Save As...`. Alternatively, the toolbar under the File menu contains icons for importing and exporting scripts.
+
+If you'd like to export content from RStudio Server, do as follows:
+
+- Go to the "Files" pane
+
+- Tick the empty boxes next to the files / folders you would like to export
+
+- Click on "More" (look for a cogwheel symbol)
+
+- Click on "Export". After this, specify a suitable name for the .zip file. The file will be saved into your default downloads folder. 

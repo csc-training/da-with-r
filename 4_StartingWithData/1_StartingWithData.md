@@ -63,13 +63,14 @@ This looks OK for now, but we could also change it using `setwd(...)` (with the 
 We can now download and then import the data:
 
 ```r
-download.file(url="https://ndownloader.figshare.com/files/2292169",
+download.file(url="https://tinyurl.com/portaljoined",
               destfile = "data/portal_data_joined.csv")
 
 surveys <- read.csv("data/portal_data_joined.csv")
 
-# Alternative link to the portal data:
+# Alternative links to the portal data:
 # https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/portal_data_joined.csv
+# https://ndownloader.figshare.com/files/2292169
 ```
 
 This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: `surveys`.

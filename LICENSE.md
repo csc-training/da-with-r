@@ -1,6 +1,6 @@
 All materials in this course are made available under the CC BY 4.0 license.
 
-The materials used in this course are based on CSC teaching materials available via a MIT License, as well as Software and Data Carpentry materials (Instructrional Materials available under the CC BY 4.0 License, Software available under the MIT License). Where modifications to Software or Data Carpentry Instructional Materials have been made, these are indicated in the relevant Markdown files. Where the course materials are derived from work that is Copyright @ Software Carpentry or Copyright @ Data Carpentry, full attribution is given in the relevant Markdown files.
+The materials used in this course are based on CSC teaching materials available via a MIT License, as well as Software and Data Carpentry materials (Instructional Materials available under the CC BY 4.0 License, Software available under the MIT License). Where modifications to Software or Data Carpentry Instructional Materials have been made, these are indicated in the relevant Markdown files. Where the course materials are derived from work that is Copyright @ Software Carpentry or Copyright @ Data Carpentry, full attribution is given in the relevant Markdown files.
 
 ---
 

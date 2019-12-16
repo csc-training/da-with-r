@@ -40,11 +40,12 @@ library(tidyverse) # Reloading tidyverse
 
 surveys_complete <- read_csv("data_output/surveys_complete.csv")
 
-# If you're looking at this episode on its own, 
-# you can download the data from:
+# The data can also be downloaded:
+download.file(url = "https://tinyurl.com/surveyscomplete",
+ destfile = "data_output/surveys_complete.csv")
 
-download.file(url = "https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv",
- destfile = "data_output/surveys_complete.csv") 
+# the tinyurl links to:
+# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv
 ```
 
 The functions for *t*-tests, Chi-squared tests and linear regression come as part of a default R installation, so we don't have to load separate packages for those. However, we can install and load the package `ggfortify`, which is useful for plotting purposes:
@@ -180,6 +181,10 @@ For a typical parametric analysis, we would move through the following steps:
 3. **Inferential statistics:** run the test and interpret the output
 
 *Remember that in some cases a non-parametric test might be your best option to start with*. The steps taken for these are very similar: describe the data, check that the assumptions are met, then go ahead with significance testing.
+
+**Challenge**
+
+Discuss in pairs: can you think of examples of data sets where a non-parametric test would be your first choice?
 
 #### 5. Examples of statistical methods
 
