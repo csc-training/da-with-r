@@ -94,8 +94,11 @@ Before we carry on working with the survey data, let's have a closer look at som
 Since we are working "in the cloud", we will again first use `download.file`  to retrieve the data from the web:
 
 ```r
-download.file(url="https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/car-speeds.csv",
+download.file(url = "https://tinyurl.com/carspeeds",
 destfile = "data/car_speeds.csv")
+
+# alternative link:
+# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/car-speeds.csv
 ```
 
 Then we can import the data into R and have a look at internal structure:
@@ -229,3 +232,15 @@ You now know some of the principles for importing data into R and exporting them
 One more thing, though: how to load and save an R script?
 
 In RStudio, we can click on `File` --> `Open File...` to load an existing script. We can also save the current one using `File` --> `Save As...`. Alternatively, the toolbar under the File menu contains icons for importing and exporting scripts.
+
+In RStudio, we can click on `File` --> `Open File...` to load an existing script. We can also save the current one using `File` --> `Save As...`. Alternatively, the toolbar under the File menu contains icons for importing and exporting scripts.
+
+If you'd like to export content from RStudio Server, do as follows:
+
+- Go to the "Files" pane
+
+- Tick the empty boxes next to the files / folders you would like to export
+
+- Click on "More" (look for a cogwheel symbol)
+
+- Click on "Export". After this, specify a suitable name for the .zip file. The file will be saved into your default downloads folder.

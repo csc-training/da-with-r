@@ -29,9 +29,12 @@ If not still in the workspace, load the data we saved in the previous lesson.
 ```r
 surveys_complete <- read_csv("data_output/surveys_complete.csv")
 
-# If you're looking at this episode on its own, you can download the data from:
-download.file(url = "https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv",
+# The data can also be downloaded:
+download.file(url = "https://tinyurl.com/surveyscomplete",
  destfile = "data_output/surveys_complete.csv")
+
+# the tinyurl links to:
+# https://raw.githubusercontent.com/csc-training/da-with-r/master/DataFiles/surveys_complete.csv
 ```
 
 #### 2. Plotting with `ggplot2`

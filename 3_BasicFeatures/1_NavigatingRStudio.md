@@ -14,8 +14,10 @@ During this workshop we will be using RStudio Server, which lets us access a rem
 
 To launch your own instance of R:
 
-- Go to [notebooks.csc.fi](https://notebooks.csc.fi) and log in using the Haka authentication service. If you do not have a Haka account and password, please let us know!
-- Find "R Data Analysis" in the dashboard and click on "Launch new".  
+- Go to [notebooks.csc.fi](https://notebooks.csc.fi) and log in using the Haka authentication service.
+- Click on "Account" and then "Join Group".
+- Click "Join" after adding this joining code: **cscdataanalysisr-9c4er**
+- Find "R Data Analysis" in the dashboard and click on "Launch new". Note: there is also an environment called "RStudio Server", but we won't use that during the course.
 - Wait for the virtual machine to start and click on "Open in browser" once the link appears.
 - Your browser will open a new window with login and password details. Press "Click to copy password & proceed".
 - This will open a new tab where you can enter a username ("rstudio") and paste your password to open up a new RStudio session.
