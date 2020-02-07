@@ -267,7 +267,7 @@ ggplot(surveys_complete, aes(x = hindfoot_length)) +
 
 **Challenge**
 
-Create a histogram that compares how the `hindfoot_length` are distributed for males and females in the `surveys_complete` data set. You should be able to tell apart the two sexes based on how the bars are colored. For this exercise, use a white `fill`, a `binwidth` of 4 and an `alpha` value of 0.5. 
+Create a histogram that compares the distribution of `weight` values between males and females in the `surveys_complete` data set. You should be able to tell apart the two sexes based on how the bars are colored. For this exercise, use a white `fill`, a `binwidth` of 4 and an `alpha` value of 0.5. 
 
 **Tip:** When plotting two data sets together in the same histogram, adding `position = "dodge"` inside the `geom` can make the results easier to interpret (it asks R to produce an interleaved plot, i.e. values are shown side-by-side rather than stacked on top of one another).    
 
